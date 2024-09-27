@@ -150,6 +150,7 @@ class VannaFlaskAPI:
         debug=True,
         allow_llm_to_see_data=False,
         chart=True,
+        app_name="app",
     ):
         """
         Expose a Flask API that can be used to interact with a Vanna instance.
@@ -166,7 +167,7 @@ class VannaFlaskAPI:
             None
         """
 
-        self.flask_app = Flask(__name__)
+        self.flask_app = Flask(app_name)
 
         self.swagger = Swagger(
             self.flask_app, template={"info": {"title": "Vanna API"}}
@@ -1229,6 +1230,7 @@ class VannaFlaskApp(VannaFlaskAPI):
         function_generation=True,
         index_html_path=None,
         assets_folder=None,
+        app_name = "app"
     ):
         """
         Expose a Flask app that can be used to interact with a Vanna instance.
@@ -1259,7 +1261,7 @@ class VannaFlaskApp(VannaFlaskAPI):
         Returns:
             None
         """
-        super().__init__(vn, cache, auth, debug, allow_llm_to_see_data, chart)
+        super().__init__(vn, cache, auth, debug, allow_llm_to_see_data, chart, app_name)
 
         self.config["logo"] = logo
         self.config["title"] = title
